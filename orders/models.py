@@ -18,9 +18,12 @@ class Payment(models.Model):
 
 class Order(models.Model):
     STATUS = (
-        ('New', 'New'),
+        ('Pending', 'Pending'),
         ('Accepted', 'Accepted'),
-        ('Completed', 'Completed'),
+        ('Inprocessed', 'Inprocessed'),
+        ('OutforDeliver', 'OutforDeliver'),
+        
+        ('Delivered', 'Delivered'),
         ('Cancelled', 'Cancelled'),
     )
 
@@ -39,7 +42,7 @@ class Order(models.Model):
     order_note = models.CharField(max_length=100, blank=True)
     order_total = models.FloatField()
     tax = models.FloatField()
-    status = models.CharField(max_length=10, choices=STATUS, default='New')
+    status = models.CharField(max_length=50, choices=STATUS, default='Pending')
     ip = models.CharField(blank=True, max_length=20)
     is_ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -61,7 +64,7 @@ class OrderProduct(models.Model):
     payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    variations = models.ManyToManyField(Variation, blank=True)
+    variations = models.ManyToManyField(Variation, blank=True,editable=False)
     quantity = models.IntegerField()
     product_price = models.FloatField()
     ordered = models.BooleanField(default=False)

@@ -1,4 +1,5 @@
 /* Hide Radio button */
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 .rate > input{
   display: none;
 }
@@ -59,3 +60,13 @@ ul.thumb li img{
   height: 80px;
   border: 1px solid grey;
 }
+.navbar-brand {
+  font-family: "Dancing Script", cursive;
+}
+
+.navbar-brand span {
+  font-weight: bold;
+  font-size: 20px;
+  color: #ffffff;
+}
+

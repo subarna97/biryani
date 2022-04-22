@@ -75,7 +75,9 @@ def payments(request):
     return JsonResponse(data)
 
 def place_order(request, total=0, quantity=0,):
+    # api_id='rzp_test_8Fma0gH8fBLyxv'
     current_user = request.user
+
 
     # If the cart count is less than or equal to 0, then redirect back to shop
     cart_items = CartItem.objects.filter(user=current_user)
@@ -128,6 +130,8 @@ def place_order(request, total=0, quantity=0,):
                 'total': total,
                 'tax': tax,
                 'grand_total': grand_total,
+                # 'api_id':api_id,
+                'order_id':order_number
             }
             return render(request, 'orders/payments.html', context)
     else:
